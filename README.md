@@ -1,4 +1,5 @@
 Tankentai Sideview Battle System v1.0 by Enu
+============
 Translation 1.2b by Wishdream
 ====
 
