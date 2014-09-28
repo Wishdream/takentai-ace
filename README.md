@@ -1,7 +1,5 @@
-Tankentai Sideview Battle System v1.0 by Enu
+Tankentai Sideview Battle System v1.0 by Enu, Translation 1.2b by Wishdream
 ============
-Translation 1.2b by Wishdream
-====
 
 Greetings and salutations, I'm Wishdream. You may know me before as Issa from my Tankentai Animation Shop, or probably Xeol from my old projects.
 
