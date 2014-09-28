@@ -1,0 +1,25 @@
+#==============================================================================
+# ? Credits
+# Please credit the following to your game if used
+#------------------------------------------------------------------------------
+
+Tankentai Sideview Battle System v1.00
+	by Enu (http://rpgex.sakura.ne.jp/home/)
+
+English Translation v1.10
+	by Wishdream (http://wishdream.org/)
+
+#------------------------------------------------------------------------------
+# ? Changelog
+#------------------------------------------------------------------------------
+	v1.1 - All Actions, Programs, Full Actions, Skills and Animations Translated
+	v1.0 - Start of Project, All Documentation Translated
+
+#------------------------------------------------------------------------------
+# ? Other resources used
+#------------------------------------------------------------------------------
+
+Music
+	by Ziifee (http://neomemo-an.com/)
+Voices
+	from Super Smash Brothers Brawl (Not for Redistribution, Placeholder Only)
