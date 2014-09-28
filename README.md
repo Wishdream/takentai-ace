@@ -8,7 +8,7 @@ I've been wondering for quite a while why there isn't any actual translation of 
 Otherwise, I hope this proves to be helpful to the users who are still interested in this.
  
 ## Note
-This is a sideview battle system, sideview as in any direction sideview. See examples of this in the screenshots.
+This is a sideview battle system, sideview as in any direction sideview.
 
 Terms of Use :
 ====
