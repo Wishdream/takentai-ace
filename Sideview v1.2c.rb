@@ -7,8 +7,10 @@
 #       by Wishdream (http://wishdream.org/)
 #       Help by Okamikurainya
 # Version Log:
-#   1.2 - System translated.
-#		1.1 - All actions, programs and full actions translated.
+#		1.2c - Sprite_Battle_Picture, Sprite_Back_Picture,and Sprite_Damage translated.
+#		1.2b - Sprite_Weapon translated.
+#   	1.2 - Sideview main class translated.
+#		1.1 - All actions, programs, and full actions translated.
 #		1.0 - Start of project, all documentation translated.
 #------------------------------------------------------------------------------
 # 　The class that manages the sideview battle system.
@@ -1077,7 +1079,7 @@ class SideView
     when 4 ; $game_variables[@action_data[1]] /= operand # Divide
     when 5 ; $game_variables[@action_data[1]] %= operand # Remainder
     end
-  end  
+  end
   #--------------------------------------------------------------------------
   # ● Conditional branch (game switch)
   #--------------------------------------------------------------------------
@@ -2276,15 +2278,15 @@ end
 #==============================================================================
 # ■ Sprite_Battle_Picture
 #------------------------------------------------------------------------------
-# 　ピクチャ表示用のスプライトです。
+# The sprite for a picture display. 
 #==============================================================================
 class Sprite_Battle_Picture < Sprite
   #--------------------------------------------------------------------------
-  # ● 公開インスタンス変数　
+  # ● Public instance variables
   #--------------------------------------------------------------------------
-  attr_accessor   :action_end           # 終了フラグ
+  attr_accessor   :action_end           # End Flag
   #--------------------------------------------------------------------------
-  # ● オブジェクト初期化
+  # ● Object initialization
   #--------------------------------------------------------------------------
   def initialize(viewport = nil)
     super(viewport)
@@ -2292,7 +2294,7 @@ class Sprite_Battle_Picture < Sprite
     self.ox = 0
   end
   #--------------------------------------------------------------------------
-  # ● セット
+  # ● Set
   #--------------------------------------------------------------------------
   def set(battler)
     @battler = battler
@@ -2324,7 +2326,7 @@ class Sprite_Battle_Picture < Sprite
     self.ox = self.bitmap.width if @mirror
   end
   #--------------------------------------------------------------------------
-  # ● プレーン移行
+  # ● Set / Transition Plane
   #--------------------------------------------------------------------------
   def set_plane(battler)
     @viewport = Viewport.new(@data[2][0],@data[2][1],@data[7][0],@data[7][1]) if !@viewport
@@ -2340,7 +2342,7 @@ class Sprite_Battle_Picture < Sprite
     @remain_move = [@move_x, @move_y]
   end
   #--------------------------------------------------------------------------
-  # ● フレーム更新
+  # ● Update
   #--------------------------------------------------------------------------
   def update
     @action_end = true if !@battler.sv.picture
@@ -2358,7 +2360,7 @@ class Sprite_Battle_Picture < Sprite
     @time = 0
   end
   #--------------------------------------------------------------------------
-  # ● フレーム更新
+  # ● Plane update
   #--------------------------------------------------------------------------
   def plane_update
     @plane.ox += @move_x
@@ -2367,7 +2369,7 @@ class Sprite_Battle_Picture < Sprite
     @time = @data[4] if @time == 0
   end
   #--------------------------------------------------------------------------
-  # ● 解放
+  # ● Dispose / Release
   #--------------------------------------------------------------------------
   def dispose
     bitmap.dispose if bitmap
@@ -2380,15 +2382,15 @@ end
 #==============================================================================
 # ■ Sprite_Back_Picture
 #------------------------------------------------------------------------------
-# 　周期ピクチャ用のスプライトです。
+# The sprite for periodic/background pictures. 
 #==============================================================================
 class Sprite_Back_Picture < Plane
   #--------------------------------------------------------------------------
-  # ● 公開インスタンス変数　
+  # ● Public instance variable
   #--------------------------------------------------------------------------
-  attr_accessor   :action_end           # 終了フラグ
+  attr_accessor   :action_end           # End Flag
   #--------------------------------------------------------------------------
-  # ● オブジェクト初期化
+  # ● Object initialization
   #--------------------------------------------------------------------------
   def initialize(viewport = nil, index)
     super(viewport)
@@ -2404,7 +2406,7 @@ class Sprite_Back_Picture < Plane
     @action_end = false
   end
   #--------------------------------------------------------------------------
-  # ● セットアップ
+  # ● Setup
   #--------------------------------------------------------------------------
   def setup(data)
     self.bitmap = Cache.picture(data[9])
@@ -2423,7 +2425,7 @@ class Sprite_Back_Picture < Plane
     @shake_ok = data[7]
   end
   #--------------------------------------------------------------------------
-  # ● フレーム更新
+  # ● Update
   #--------------------------------------------------------------------------
   def update
     update_picture if @time != 0
@@ -2444,7 +2446,7 @@ class Sprite_Back_Picture < Plane
     @action_end = true if @switche < 0 && !$sv_camera.switches[@switche.abs]
   end
   #--------------------------------------------------------------------------
-  # ● ピクチャの更新
+  # ● Update picture
   #--------------------------------------------------------------------------
   def update_picture
     @real_x += @move_x / 100
@@ -2460,17 +2462,17 @@ class Sprite_Back_Picture < Plane
 end
 
 #==============================================================================
-# ■ Sprite_Back_Picture
+# ■ Sprite_Damage
 #------------------------------------------------------------------------------
-# 　ダメージ表示のスプライトです。
+# The sprite of the damage display. 
 #==============================================================================
 class Sprite_Damage < Sprite
   #--------------------------------------------------------------------------
-  # ● 公開インスタンス変数　
+  # ● Public instance variables
   #--------------------------------------------------------------------------
-  attr_reader   :action_end                  # POP終了フラグ
+  attr_reader   :action_end                  # Exit POP flag
   #--------------------------------------------------------------------------
-  # ● オブジェクト初期化
+  # ● Object initialization
   #--------------------------------------------------------------------------
   def initialize(viewport = nil, battler)
     super(viewport)
@@ -2485,7 +2487,7 @@ class Sprite_Damage < Sprite
     update
   end 
   #--------------------------------------------------------------------------
-  # ● ステート表示
+  # ● Set state
   #--------------------------------------------------------------------------
   def set_state
     return if !N03::STATE_POP
@@ -2508,7 +2510,7 @@ class Sprite_Damage < Sprite
     @time = @pop_time = 80
   end   
   #--------------------------------------------------------------------------
-  # ● ステート画像
+  # ● State bitmap/image
   #--------------------------------------------------------------------------
   def bitmap_state(state, state_object)
     name = state_object.name
@@ -2517,7 +2519,7 @@ class Sprite_Damage < Sprite
     @state_height = 24
   end
   #--------------------------------------------------------------------------
-  # ● ダメージ表示
+  # ● Damage Count
   #--------------------------------------------------------------------------
   def hit_count
     for i in 0...@battler.sv.hit.size
@@ -2530,7 +2532,7 @@ class Sprite_Damage < Sprite
     @battler.sv.hit.push(@hit)
   end  
   #--------------------------------------------------------------------------
-  # ● ダメージ表示
+  # ● Damage Display
   #--------------------------------------------------------------------------
   def set_damage
     return @action_end = true if !N03::DAMAGE_POP
@@ -2541,7 +2543,7 @@ class Sprite_Damage < Sprite
     damage = @battler.result.tp_damage if @battler.result.tp_damage != 0
     if !damage or damage == 0
       @action_end = true if @st == nil
-      return # ステートだけPOPする設定を考慮して@action_endは返さない
+      return # @action_end does not return, considering only State POP settings
     end
     hit_count
     #@hit = @battler.sv.hit
@@ -2577,7 +2579,7 @@ class Sprite_Damage < Sprite
     @time = @pop_time = 80
   end
   #--------------------------------------------------------------------------
-  # ● フレーム更新
+  # ● Frame update
   #--------------------------------------------------------------------------
   def update
     return if @time == 0
@@ -2587,7 +2589,7 @@ class Sprite_Damage < Sprite
     @action_end = true if @time == 0
   end
   #--------------------------------------------------------------------------
-  # ● ステート画像の更新
+  # ● State image update
   #--------------------------------------------------------------------------
   def update_state_move(state, index)
     min = @pop_time - index * 2
@@ -2603,7 +2605,7 @@ class Sprite_Damage < Sprite
     state.y = (@st_base[index][1] - $sv_camera.y) * $sv_camera.zoom
   end
   #--------------------------------------------------------------------------
-  # ● 数値の更新
+  # ● Update number
   #--------------------------------------------------------------------------
   def update_num_move(num, index)
     min = @pop_time - index * 2
@@ -2639,7 +2641,7 @@ class Sprite_Damage < Sprite
     num.visible = false if @time == 0
   end
   #--------------------------------------------------------------------------
-  # ● 解放
+  # ● Dispose / Release
   #--------------------------------------------------------------------------
   def dispose
     @battler.sv.hit[@hit] = nil if @hit
