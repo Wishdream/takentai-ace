@@ -7,7 +7,8 @@
 #       by Wishdream (http://wishdream.org/)
 #       Help by Okamikurainya
 # Version Log:
-#		1.2c - Sprite_Battle_Picture, Sprite_Back_Picture,and Sprite_Damage translated.
+#		1.2d - Window_Skill_name, Spriteset_Sideview translated.
+#		1.2c - Sprite_Battle_Picture, Sprite_Back_Picture, and Sprite_Damage translated.
 #		1.2b - Sprite_Weapon translated.
 #   	1.2 - Sideview main class translated.
 #		1.1 - All actions, programs, and full actions translated.
@@ -2655,11 +2656,11 @@ end
 #==============================================================================
 # ■ Window_Skill_name
 #------------------------------------------------------------------------------
-# 　スキル名を表示するウィンドウです。
+# 　The window to display the skill name.
 #==============================================================================
 class Window_Skill_name < Window_Base
   #--------------------------------------------------------------------------
-  # ● オブジェクト初期化
+  # ● Object initialization
   #--------------------------------------------------------------------------
   def initialize(text)
     super(0, 0, Graphics.width, line_height + standard_padding * 2)
@@ -2670,11 +2671,11 @@ end
 #==============================================================================
 # ■ Spriteset_Sideview
 #------------------------------------------------------------------------------
-# 　サイドビュー独自のスプライトをまとめたクラスです。
+# 　A class that summarizes the sideview sprites.
 #==============================================================================
 class Spriteset_Sideview
   #--------------------------------------------------------------------------
-  # ● オブジェクト初期化
+  # ● Object initialization
   #--------------------------------------------------------------------------
   def initialize(viewport)
     @viewport = viewport
@@ -2686,7 +2687,7 @@ class Spriteset_Sideview
     N03.camera(nil, N03::BATTLE_CAMERA["Before Turn Start"].dup)
   end
   #--------------------------------------------------------------------------
-  # ● フレーム更新
+  # ● Frame update
   #--------------------------------------------------------------------------
   def update
     update_battler_data
@@ -2696,7 +2697,7 @@ class Spriteset_Sideview
     update_weapons
   end  
   #--------------------------------------------------------------------------
-  # ● バトラーデータの更新
+  # ● Update battler data
   #--------------------------------------------------------------------------
   def update_battler_data
     for battler in $game_party.battle_members + $game_troop.members
@@ -2706,7 +2707,7 @@ class Spriteset_Sideview
     end
   end
   #--------------------------------------------------------------------------
-  # ● ダメージ画像の更新
+  # ● Update damage
   #--------------------------------------------------------------------------
   def update_damage
     for i in 0...@damage.size
@@ -2718,7 +2719,7 @@ class Spriteset_Sideview
     end
   end
   #--------------------------------------------------------------------------
-  # ● ピクチャアクションの更新
+  # ● Update pictures
   #--------------------------------------------------------------------------
   def update_pictures
     for i in 0...@pictures.size
@@ -2730,7 +2731,7 @@ class Spriteset_Sideview
     end
   end
   #--------------------------------------------------------------------------
-  # ● 周期ピクチャの更新
+  # ● Update background pictures
   #--------------------------------------------------------------------------
   def update_back_pic
     set_back_pic if $sv_camera.program_picture != []
@@ -2743,7 +2744,7 @@ class Spriteset_Sideview
     end
   end
   #--------------------------------------------------------------------------
-  # ● 武器アクションの更新
+  # ● Update weapons
   #--------------------------------------------------------------------------
   def update_weapons
     for i in 0...@weapons.size
@@ -2755,7 +2756,7 @@ class Spriteset_Sideview
     end
   end
   #--------------------------------------------------------------------------
-  # ● ダメージ実行
+  # ● Set / Execute Damage
   #--------------------------------------------------------------------------
   def set_damage_pop(target)
     for i in 0...@damage.size
@@ -2765,7 +2766,7 @@ class Spriteset_Sideview
     @damage.push(Sprite_Damage.new(@viewport, target))
   end
   #--------------------------------------------------------------------------
-  # ● 周期ピクチャ実行
+  # ● Set Background Picture
   #--------------------------------------------------------------------------
   def set_back_pic
     for data in $sv_camera.program_picture
@@ -2779,7 +2780,7 @@ class Spriteset_Sideview
     $sv_camera.program_picture = []
   end
   #--------------------------------------------------------------------------
-  # ● エフェクト開始
+  # ● Set Effects
   #--------------------------------------------------------------------------
   def set_effects(battler, effect_data)
     case effect_data[0]
@@ -2789,14 +2790,14 @@ class Spriteset_Sideview
     end
   end
   #--------------------------------------------------------------------------
-  # ● ピクチャアクション実行
+  # ● Set Pictures
   #--------------------------------------------------------------------------
   def set_pictures(battler, effect_data)
     @pictures[effect_data[1]] = Sprite_Battle_Picture.new if @pictures[effect_data[1]] == nil
     @pictures[effect_data[1]].set(battler)
   end
   #--------------------------------------------------------------------------
-  # ● 武器アクション実行
+  # ● Set Weapons
   #--------------------------------------------------------------------------
   def set_weapons(battler, weapon_flag, test = true)
     for i in 0...@weapons.size
@@ -2810,7 +2811,7 @@ class Spriteset_Sideview
     return @weapons.size - 1
   end
   #--------------------------------------------------------------------------
-  # ● バトラーの武器アクション終了
+  # ● Battler End Weapon Animation
   #--------------------------------------------------------------------------
   def weapon_end(battler)
     battler.sv.weapon_end = false
@@ -2822,7 +2823,7 @@ class Spriteset_Sideview
     battler.sv.weapon_index.compact!
   end  
   #--------------------------------------------------------------------------
-  # ● ヒット時の戦闘アニメ実行
+  # ● Set Hit Animation
   #--------------------------------------------------------------------------
   def set_hit_animation(battler, weapon_index, hit_targets, miss)
     weapon = @weapons[weapon_index]
@@ -2840,14 +2841,14 @@ class Spriteset_Sideview
     end
   end
   #--------------------------------------------------------------------------
-  # ● サイドビューデータの初期化
+  # ● Initialize / Reset Sideview Data
   #--------------------------------------------------------------------------
   def reset_sideview
     $sv_camera.reset
     for member in $game_troop.members + $game_party.battle_members do member.sv.reset end
   end  
   #--------------------------------------------------------------------------
-  # ● 解放
+  # ● Dispose / Release
   #--------------------------------------------------------------------------
   def dispose
     dispose_effects(@weapons)
@@ -2857,7 +2858,7 @@ class Spriteset_Sideview
     reset_sideview
   end
   #--------------------------------------------------------------------------
-  # ● エフェクト画像の解放
+  # ● Dispose / Release Effects
   #--------------------------------------------------------------------------
   def dispose_effects(effects)
     for i in 0...effects.size
